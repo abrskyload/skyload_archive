@@ -1,0 +1,18 @@
+/**
+ * Skyload - Download manager for media content
+ * @link http://skyload.io
+ *
+ * @version v7.3.1
+ *
+ * License Agreement:
+ * http://skyload.io/eula
+ *
+ * Privacy Policy:
+ * http://skyload.io/privacy-policy
+ *
+ * Support and FAQ:
+ * http://skyload.io/help
+ * skyload.extension@gmail.com
+ */
+
+.vimeo__box-container{display:none!important}.skyload-video__available .skyload-video__preloader .clip_info-subline--watch:after{content:"";width:110px;height:10px;display:inline-block;position:relative;left:1.7775rem;background-position:0 0;background-repeat:no-repeat;background-image:url(chrome-extension://__MSG_@@extension_id__/images/content/skyload-vimeo-preloader.gif)}.skyload-video__available .vimeo__box-container{-webkit-border-radius:.3125rem;border-radius:.3125rem;padding:.45rem 1rem;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;font-size:16px;font-weight:700;display:inline-block!important}.skyload-video__available .vimeo__box-download-icon{display:inline-block;color:#00ADEF}.skyload-video__available .vimeo__box-videos{display:inline-block;margin:0 1rem}.skyload-video__available .vimeo__box-item{display:inline-block;cursor:pointer;font-size:13px;margin:0 .3rem}.skyload-video__available .vimeo__box-item:hover{text-decoration:underline;color:#00ADEF}

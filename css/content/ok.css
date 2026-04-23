@@ -1,0 +1,18 @@
+/**
+ * Skyload - Download manager for media content
+ * @link http://skyload.io
+ *
+ * @version v7.3.1
+ *
+ * License Agreement:
+ * http://skyload.io/eula
+ *
+ * Privacy Policy:
+ * http://skyload.io/privacy-policy
+ *
+ * Support and FAQ:
+ * http://skyload.io/help
+ * skyload.extension@gmail.com
+ */
+
+.ok__download-button{display:none}.skyload-sound__available .ok__download-button{width:16px;height:16px;display:block;position:absolute;top:6px;margin-left:1px;background-position:0 -1px;background-repeat:no-repeat;background-image:url(chrome-extension://__MSG_@@extension_id__/images/content/skyload-ok-download-icon.png)}.skyload-sound__available .ok__download-button:hover{background-position:0 -21px}.skyload-sound__available .ok__download-button-new{width:40px;height:40px;margin-left:10px;-webkit-box-sizing:border-box;box-sizing:border-box;display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;-webkit-box-pack:center;-webkit-justify-content:center;-ms-flex-pack:center;justify-content:center;-webkit-box-align:center;-webkit-align-items:center;-ms-flex-align:center;align-items:center}.ok__download-video-button,.ok__download_video_widget,.skyload-sound__available .mus-tr_download{display:none!important}.skyload-sound__available .ok__download-button-icon{stroke:#999;width:20px;height:20px}.skyload-sound__available .ok__download-button-new:hover .ok__download-button-icon{stroke:#54a22c}.skyload-sound__available .mus-tr_cnt{margin-left:23px}.skyload-sound__available .mus-tr_i__download{padding-left:23px!important}.skyload-sound__available .mus-tr_i.__download .mus-tr_hld{padding-left:24px!important}.skyload-sound__available .mus-tr_i:not([skyload=mod]){background-repeat:no-repeat;background-position:28px 7px;background-image:url(chrome-extension://__MSG_@@extension_id__/images/content/skyload-ok-preloader.gif)}.skyload-video__available .skyload-video__preloader .vp-layer-info .widget-list .widget-list_i:first-child{position:relative}.skyload-video__available .skyload-video__preloader .vp-layer-info .widget-list .widget-list_i:first-child:before{content:"";width:88px;height:8px;display:inline-block;position:absolute;left:-100px;top:9px;background-position:0 0;background-repeat:no-repeat;background-image:url(chrome-extension://__MSG_@@extension_id__/images/content/skyload-ok-video-preloader.gif)}.skyload-video__available .ok__download_video_widget{display:inline-block!important}.skyload-video__available .ok__download-video-button{display:block!important}.skyload-video__available .ok__download-video-button__icon{vertical-align:-3px;height:12px;background-repeat:no-repeat;background-position:0 0;background-image:url(chrome-extension://__MSG_@@extension_id__/images/content/skyload-ok-download-video-icon.png)}.skyload-video__available .feed .ok__download-video-button__icon{width:13px!important;height:12px!important;position:relative;top:-2px}.skyload-video__available .ok__download-video-button:hover .ok__download-video-button__icon{background-position:0 -12px}.skyload-video__available .ok__video-item{font-size:13px;line-height:35px!important}.skyload-video__available .ok__video-item-cover{width:32px;height:32px;position:absolute;top:0;left:0;-webkit-background-size:cover;background-size:cover;display:inline-block;background-position:center center}

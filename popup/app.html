@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Skyload</title>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="/css/popup/app.css">
+
+    <script data-main="/js/popup/app.js" src="/js/vendor/requirejs/require.js"></script>
+
+    <script type="text/template" id="template-content-item">
+        <div class="b-content-item__wrapper js-body js-ripple-effect">
+            <div class="b-content-item__control">
+                <div class="b-content-item__control-cover js-cover" title="<%= Skyload.getLocale('play') %>">
+                    <div class="b-content-item__control-poster js-poster"<% if(!_.isNull(cover)) { %> style="background-image: url(<%= cover %>)"<% } %>></div>
+                </div>
+                <div class="b-content-item__control-checkbox">+</div>
+            </div>
+            <div class="b-content-item__text">
+                <div class="b-content-item__text-title" title="<%= name %>"><%= title %></div>
+                <div class="b-content-item__text-description">
+                    <span class="b-content-item__text-icon js-icon"><%= type %></span>
+                    <span class="js-description" title="<%= description_title %>"><%= description %></span>
+                </div>
+            </div>
+            <div class="b-content-item__progress">
+                <div class="b-content-item__progress-bar js-progress-bar" style="width: <%= download_progress %>%;"></div>
+            </div>
+        </div>
+        <div class="b-content-item__download-control">
+            <div class="b-button b-content-item__button b-content-item__button-resume js-download-resume"><%= Skyload.getLocale('resume') %></div>
+            <div class="b-button b-content-item__button b-content-item__button-pause js-download-pause"><%= Skyload.getLocale('pause') %></div>
+            <div class="b-button b-content-item__button b-content-item__button-cancel js-download-cancel"><%= Skyload.getLocale('cancel') %></div>
+        </div>
+        <div class="b-content-item__menu-button js-ripple-effect js-menu-button" data-menu="button">
+            <div class="b-content-item__menu-button-rounds">
+                <div class="b-content-item__menu-button-round"></div>
+                <div class="b-content-item__menu-button-round"></div>
+                <div class="b-content-item__menu-button-round"></div>
+            </div>
+        </div>
+        <nav class="b-content-item__menu js-menu">
+            <div class="b-content-item__menu-items">
+                <div class="b-content-item__menu-item-group b-content-item__menu-item-download">
+                    <div class="b-content-item__menu-item js-menu-select"><%= Skyload.getLocale('download') %></div>
+                </div>
+                <div class="b-content-item__menu-item-group b-content-item__menu-item-select">
+                    <div class="b-content-item__menu-item js-menu-select"><%= Skyload.getLocale('select') %></div>
+                </div>
+                <div class="b-content-item__menu-item b-content-item__menu-item-play js-menu-play"><%= Skyload.getLocale('play') %></div>
+                <div class="b-content-item__menu-item b-content-item__menu-item-open js-menu-open"><%= Skyload.getLocale('open') %></div>
+                <div class="b-content-item__menu-item b-content-item__menu-item-show js-menu-show"><%= Skyload.getLocale('show') %></div>
+                <div class="b-content-item__menu-item b-content-item__menu-item-resume js-download-resume"><%= Skyload.getLocale('resume') %></div>
+                <div class="b-content-item__menu-item b-content-item__menu-item-pause js-download-pause"><%= Skyload.getLocale('pause') %></div>
+                <div class="b-content-item__menu-item b-content-item__menu-item-cancel js-download-cancel"><%= Skyload.getLocale('cancel') %></div>
+            </div>
+        </nav>
+    </script>
+
+    <script type="text/template" id="template-checkbox">
+        <div class="b-checkbox__bar">
+            <div class="b-checkbox__bar__cursor"></div>
+        </div>
+        <div class="b-checkbox__label"><%= label %></div>
+        <div class="x-clearfix"></div>
+    </script>
+
+    <script type="text/template" id="template-content-info-item">
+        <div class="b-counts__item m-counts-item-<%= type %>">
+            <div class="b-counts__title" style="border-bottom-color: <%= color %>;"><%= title %></div>
+            <div class="b-counts__value"><%= value %></div>
+        </div>
+    </script>
+
+    <script type="text/template" id="template-sidebar">
+        <header class="b-sidebar-header">
+            <div class="b-menu-icon js-menu-open js-ripple-effect">
+                <div class="b-menu-icon__item m-menu-icon-item-top"></div>
+                <div class="b-menu-icon__item m-menu-icon-item-middle"></div>
+                <div class="b-menu-icon__item m-menu-icon-item-bottom"></div>
+            </div>
+
+            <div class="b-logo">
+                <div class="b-logo__name js-logo"><%= Skyload.getLocale('app_name') %></div>
+            </div>
+        </header>
+
+        <main class="b-slide">
+            <div class="b-slide__wrapper">
+                <section class="b-graph b-slide__item">
+                    <div class="b-panel b-graph__panel">
+                        <div class="b-title b-info__title b-graph__title"><%= Skyload.getLocale('found') %></div>
+                        <div class="b-chart js-chart"></div>
+                        <div class="b-counts js-counts"></div>
+                        <div class="b-panel__button js-button-multiupload js-ripple-effect" data-mode="1"><%= Skyload.getLocale('multiupload') %></div>
+                    </div>
+                </section>
+
+                <section class="b-multiupload b-slide__item">
+                    <div class="b-title b-info__title b-multiupload__title"><%= Skyload.getLocale('multiupload') %></div>
+                    <div class="b-button-group">
+                        <div class="b-button b-button-group__button b-button-blue js-button-select-all js-ripple-effect" data-type="all"><%= Skyload.getLocale('all') %></div>
+                        <div class="b-button b-button-group__button b-button-blue b-button-selected js-button-select-several js-ripple-effect" data-type="several"><%= Skyload.getLocale('several') %></div>
+                    </div>
+                    <div class="b-info-grid">
+                        <div class="b-info-grid__item m-info-grid-selected-count">
+                            <div class="b-info-grid__item-title"><%= Skyload.getLocale('selected') %></div>
+                            <div class="b-info-grid__item-value js-multiupload-selected-count">0</div>
+                            <div class="b-info-grid__item-description js-multiupload-selected-type"><%= Skyload.getLocale('files') %></div>
+                        </div>
+                        <div class="b-info-grid__item m-info-grid-size">
+                            <div class="b-info-grid__item-title"><%= Skyload.getLocale('size') %></div>
+                            <div class="b-info-grid__item-value js-multiupload-size">0</div>
+                            <div class="b-info-grid__item-description js-multiupload-size-type"><%= Skyload.getLocale('kb') %></div>
+                        </div>
+                    </div>
+                    <div class="b-multiupload-separate js-multiupload-separate"></div>
+                    <div class="b-settings-buttons">
+                        <div class="b-button b-button-grey b-settings-buttons__button js-button-multiupload-cancel js-ripple-effect" data-mode="0"><%= Skyload.getLocale('cancel') %></div>
+                        <div class="b-button b-button-inactive b-button-green b-settings-buttons__button js-button-multiupload-download js-ripple-effect"><%= Skyload.getLocale('download') %></div>
+                    </div>
+                </section>
+
+                <section class="b-download b-slide__item">
+                    <div class="b-title b-info__title b-download__title"><%= Skyload.getLocale('download_process') %></div>
+                    <div class="b-download__progress js-download-progress">
+                        <span class="b-download__progress-label js-download-progress-label">0</span>
+                    </div>
+                    <div class="b-info-grid">
+                        <div class="b-info-grid__item m-info-grid-download-count">
+                            <div class="b-info-grid__item-title"><%= Skyload.getLocale('loaded') %></div>
+                            <div class="b-info-grid__item-value js-download-count">0</div>
+                            <div class="b-info-grid__item-description js-download-count-type"><%= Skyload.getLocale('files') %></div>
+                        </div>
+                        <div class="b-info-grid__item m-info-grid-queue-count">
+                            <div class="b-info-grid__item-title"><%= Skyload.getLocale('in_the_queue_2') %></div>
+                            <div class="b-info-grid__item-value js-download-queue-count">0</div>
+                            <div class="b-info-grid__item-description js-download-queue-count-type"><%= Skyload.getLocale('files') %></div>
+                        </div>
+                    </div>
+                    <div class="b-settings-buttons">
+                        <div class="b-button b-button-grey b-settings-buttons__button b-button-download-back js-button-download-back js-ripple-effect" data-mode="0"><%= Skyload.getLocale('back') %></div>
+                        <div class="b-button b-button-blue b-settings-buttons__button js-button-download-cancel js-ripple-effect"><%= Skyload.getLocale('cancel') %></div>
+                    </div>
+                </section>
+            </div>
+        </main>
+
+        <div class="b-control">
+            <div class="b-download-informer m-download-informer-hide js-download-informer">
+                <div class="b-panel b-download-informer__panel js-download-informer-panel js-ripple-effect" data-mode="1">
+                    <div class="b-panel__container b-download-informer__panel-container">
+                        <div class="b-title b-info__title b-download-informer-title" title="<%= Skyload.getLocale('loaded') %>"><%= Skyload.getLocale('loaded') %></div>
+                        <div class="b-download-informer__status js-download-informer-status"></div>
+                        <div class="b-download-informer__progress-rail">
+                            <div class="b-download-informer__progress-bar js-download-informer-progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="b-interface-access">
+                <div class="js-interface-access"></div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="template-content">
+        <header class="b-content-header">
+            <div class="b-content-header__search js-search-bar">
+                <input class="b-content-header__search-input js-search-input" type="text" />
+                <div class="b-content-header__search-close b-close-icon js-search-close"></div>
+            </div>
+            <div class="b-title b-content-header__text js-content-title"></div>
+            <div class="b-content-header__search-icon js-search-open"></div>
+        </header>
+        <div class="js-scroll-bar">
+            <div class="b-content-list js-content-list"></div>
+        </div>
+    </script>
+
+    <script type="text/template" id="template-menu">
+        <div class="b-menu">
+            <div class="b-menu__scroll-bar js-menu-scroll-bar">
+                <header class="b-menu-header">
+                    <div class="b-close-icon b-menu-header__close js-close"></div>
+
+                    <div class="b-logo">
+                        <div class="b-logo__name js-logo"><%= Skyload.getLocale('app_name') %></div>
+                    </div>
+                </header>
+
+                <div class="b-menu-profile">
+                    <div class="b-panel js-menu-profile"></div>
+                </div>
+
+                <section class="b-menu-group">
+                    <h3 class="b-menu-group__title"><%= Skyload.getLocale('menu') %></h3>
+
+                    <ul class="b-menu-list m-menu-list-navigation">
+                        <% for(var item in menu) { %>
+                        <li class="b-menu-list__item m-menu-item-<%= item %> js-menu-item-navigation js-ripple-effect" data-item="<%= item %>">
+                            <%= menu[item] %>
+                        </li>
+                        <% } %>
+                    </ul>
+                </section>
+
+                <section class="b-menu-group">
+                    <h3 class="b-menu-group__title"><%= Skyload.getLocale('lang') %></h3>
+
+                    <ul class="b-menu-list m-menu-list-lang">
+                        <% for(var locale in Skyload.Lang.getLocales()) { %>
+                        <li class="b-menu-list__item <%= Skyload.Lang.getLocale() == locale ? 'm-menu-item-active ' : '' %>js-menu-item-lang js-ripple-effect" data-locale="<%= locale %>"><%= Skyload.Lang.getNameLocale(locale) %></li>
+                        <% } %>
+                    </ul>
+                </section>
+
+                <section class="b-menu-group">
+                    <h3 class="b-menu-group__title"><%= Skyload.getLocale('social_networks') %></h3>
+
+                    <ul class="b-menu-list m-menu-list-lang">
+                        <% for(var item in social_networks) { %>
+                        <li class="b-menu-list__item js-menu-item-navigation js-ripple-effect" data-locale="<%= item %>" data-item="<%= item %>_page">
+                            <%= social_networks[item] %>
+                        </li>
+                        <% } %>
+                    </ul>
+                </section>
+
+                <section class="b-menu-group">
+                    <h3 class="b-menu-group__title"><%= Skyload.getLocale('partners') %></h3>
+
+                    <a target="_blank" href="<%= hashtap_url %>">
+                        <img style="display: block; margin-left: 16px;" src="./../images/popup/hashtap_skyload.png" alt="Hashtap Logo"/>
+                    </a>
+                </section>
+
+                <div class="b-menu-footer">
+                    <h3 class="b-menu-footer__title"><%= Skyload.getLocale('advice') %></h3>
+                    <article class="b-menu-footer__advice"><%= Skyload.getLocale('advice_text_' + _.random(3)) %></article>
+                </div>
+            </div>
+        </div>
+    </script>
+
+    <script type="text/template" id="template-profile">
+        <% if(profile.isLogin()) { %>
+        <div class="b-profile__picture">
+            <div class="b-profile__picture__img" style="background-image: url(<%= profile.getPicture() %>);"></div>
+        </div>
+
+        <div class="b-profile__name"><%= profile.getFullName() %></div>
+
+        <div class="b-profile__description">
+            <% if(!profile.hasSubscription()) { %>
+            <%= Skyload.getLocale('subscription_des') %>
+            <% } else { %>
+            <% if(profile.getSubscription().get('plan') == Skyload.PLAN_HALF_YEAR) { %>
+            <%= Skyload.getLocale('subscription_half_year_des') %>
+            <% } else { %>
+            <%= Skyload.getLocale('subscription_'+ profile.getSubscription().get('plan') +'_des') %>
+            <% } %>
+
+            <% if(profile.getSubscription().get('plan') != Skyload.PLAN_FOREVER) { %>
+            <%= Skyload.getLocale('subscription_expired') %> <%= profile.getSubscription().get('expired') %>
+            <% } %>
+            <% } %>
+        </div>
+
+        <% if(!profile.hasSubscription() || (profile.hasSubscription() && profile.getSubscription().get('plan') != Skyload.PLAN_FOREVER)) { %>
+        <div class="b-profile__button js-profile-button js-donate js-ripple-effect">
+            <% if(!profile.hasSubscription()) { %>
+            <%= Skyload.getLocale('get_subscription') %>
+            <% } else if(profile.hasSubscription() && profile.getSubscription().get('plan') != Skyload.PLAN_FOREVER) { %>
+            <%= Skyload.getLocale('subscription_extend') %>
+            <% } %>
+        </div>
+        <% } %>
+
+        <% } else { %>
+        <div class="b-profile__picture"></div>
+
+        <div class="b-profile__description"><%= Skyload.getLocale('donate_motivation') %></div>
+        <div class="b-profile__button js-profile-button js-login js-ripple-effect"><%= Skyload.getLocale('login') %></div>
+        <% } %>
+    </script>
+
+    <script type="text/template" id="template-state">
+        <div class="b-state">
+            <header class="b-state-header">
+                <div class="b-menu-icon js-menu-open js-ripple-effect">
+                    <div class="b-menu-icon__item m-menu-icon-item-top"></div>
+                    <div class="b-menu-icon__item m-menu-icon-item-middle"></div>
+                    <div class="b-menu-icon__item m-menu-icon-item-bottom"></div>
+                </div>
+
+                <div class="b-logo">
+                    <div class="b-logo__name js-logo"><%= Skyload.getLocale('app_name') %></div>
+                </div>
+            </header>
+
+            <div class="b-state__content js-state-content"></div>
+        </div>
+    </script>
+
+    <script type="text/template" id="template-state-empty">
+        <div class="b-state__img"></div>
+        <div class="b-state__title"><%= Skyload.getLocale('no_files') %></div>
+        <div class="b-state__description"><%= Skyload.getLocale('empty_state_text') %></div>
+        <a href="<%= Skyload.App.getMenu().helpEmptyStateUrl %>" target="_blank" class="b-button b-button-blue b-button-selected b-button-long b-state__button"><%= Skyload.getLocale('learn_more') %></a>
+    </script>
+
+    <script type="text/template" id="template-state-youtube">
+        <div class="b-state__img"></div>
+        <div class="b-state__title"><%= Skyload.getLocale('youtube_state_title') %></div>
+        <div class="b-state__description">
+            <p class="b-state__description__selection"><%= Skyload.getLocale('youtube_state_text_start') %></p>
+            <p class="b-state__description__selection"><%= Skyload.getLocale('youtube_state_text_end') %></p>
+        </div>
+        <a href="<%= Skyload.App.getMenu().downloadYouTubeUrl %>" target="_blank" class="b-button b-button-blue b-button-selected b-button-long b-state__button"><%= Skyload.getLocale('learn_how_download') %></a>
+    </script>
+
+    <script type="text/template" id="template-state-skyload">
+        <% if(profile.isLogin()) { %>
+        <div class="b-state__title"><%=  _.template(Skyload.getLocale('welcome_state_title_login'))({username : profile.get('first_name')}) %></div>
+        <% } else { %>
+        <div class="b-state__img"></div>
+        <div class="b-state__title"><%= Skyload.getLocale('welcome_state_title') %></div>
+        <div class="b-state__description"><%= Skyload.getLocale('donate_motivation') %></div>
+        <a href="<%= Skyload.App.getMenu().loginSiteStateUrl %>" target="_blank" class="b-button b-button-blue b-button-selected b-button-long b-state__button"><%= Skyload.getLocale('login') %></a>
+        <% } %>
+    </script>
+
+    <script type="text/template" id="template-player">
+        <div class="b-player-wrapper js-wrapper">
+            <header class="b-player-header">
+                <div class="b-player-status js-status"></div>
+
+                <div class="b-logo">
+                    <div class="b-logo__name js-logo">Skyload</div>
+                    <div class="b-logo__suffix">
+                        <div class="b-logo__suffix-dot">.</div>
+                        <div class="b-logo__suffix-name">io</div>
+                    </div>
+                </div>
+
+                <div class="b-close-icon b-player-header__close js-close"></div>
+            </header>
+
+            <main class="b-player-content">
+                <div class="b-player-poster">
+                    <div class="b-player-poster__img js-poster"></div>
+                </div>
+
+                <div class="b-player-media js-media"></div>
+
+                <div class="b-player-content__error"><%= Skyload.getLocale('play_error_message') %></div>
+            </main>
+
+            <article class="b-player-title">
+                <h1 class="b-player-title__name js-name"></h1>
+                <div class="b-player-title__details js-details"></div>
+            </article>
+
+            <nav class="b-player-control">
+                <div class="b-player-control__button b-player-control__prev js-prev">
+                    <div class="b-player-control__button-inner js-ripple-effect"></div>
+                </div>
+                <div class="b-player-control__button b-player-control__toggle js-toggle">
+                    <div class="b-player-control__button-inner js-ripple-effect"></div>
+                </div>
+                <div class="b-player-control__button b-player-control__next js-next">
+                    <div class="b-player-control__button-inner js-ripple-effect"></div>
+                </div>
+            </nav>
+
+            <nav class="b-player-progress">
+                <time class="b-player-progress__time js-current-time">00:00</time>
+                <div class="b-player-progress__bar js-progress-bar">
+                    <div class="b-player-progress__bar-buffer js-buffer-bar"></div>
+                    <div class="b-player-progress__bar-time js-time-bar"></div>
+                </div>
+                <time class="b-player-progress__time js-duration-time">00:00</time>
+            </nav>
+
+            <div class="b-player-error">
+                <div class="b-player-error__message"><%= Skyload.getLocale('play_error_message') %></div>
+            </div>
+
+            <div class="b-player-action">
+                <div class="b-button b-player-action__button b-player-actions-button-open js-open-file js-ripple-effect"><%= Skyload.getLocale('open') %></div>
+                <div class="b-button b-player-action__button b-player-actions-button-download js-download js-ripple-effect"><%= Skyload.getLocale('download') %></div>
+                <div class="b-button b-player-action__button b-player-actions-button-cancel js-cancel-download js-ripple-effect"><%= Skyload.getLocale('cancel') %></div>
+                <div class="b-button b-player-action__button b-player-actions-button-show js-show-download js-ripple-effect"><%= Skyload.getLocale('show') %></div>
+            </div>
+
+            <div class="b-player-download-progress">
+                <div class="b-player-download-progress__bar js-download-progress"></div>
+            </div>
+        </div>
+        <div class="b-player-bg js-bg"></div>
+    </script>
+
+    <script type="text/template" id="template-layout">
+        <div class="l-wrapper">
+            <div class="l-blanket js-blanket"></div>
+            <div class="l-workspace js-workspace"></div>
+            <div class="l-player js-player"></div>
+        </div>
+    </script>
+</head>
+<body class="m-body-preloader"></body>
+</html>

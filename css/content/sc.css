@@ -1,0 +1,18 @@
+/**
+ * Skyload - Download manager for media content
+ * @link http://skyload.io
+ *
+ * @version v7.3.1
+ *
+ * License Agreement:
+ * http://skyload.io/eula
+ *
+ * Privacy Policy:
+ * http://skyload.io/privacy-policy
+ *
+ * Support and FAQ:
+ * http://skyload.io/help
+ * skyload.extension@gmail.com
+ */
+
+.sc__download-button{display:none!important}.skyload-sound__available .sc__download-button{display:inline-block!important}.skyload-sound__available .sc__tooltip{position:absolute;outline:0;width:auto;z-index:2000;color:#fff;padding:0 5px;line-height:20px;-webkit-border-radius:3px;border-radius:3px;background:rgba(0,0,0,.8)}.skyload-sound__available .sc__tooltip__arrow{bottom:100%;left:50%;border:solid transparent;content:" ";height:0;width:0;position:absolute;pointer-events:none;border-bottom-color:rgba(0,0,0,.8);border-width:5px;margin-left:-5px}.skyload-sound__available .sc__tooltip.m-is-top .sc__tooltip__arrow{top:100%;border-top-color:rgba(0,0,0,.7);border-bottom-color:transparent}.skyload-sound__available .playbackSoundBadge__titleContextContainer{width:200px}.skyload-sound__available .playbackSoundBadge__actions .sc__download-button{padding:12px;border:0;background:0 0}.skyload-sound__available .playbackSoundBadge__actions .sc__download-button:before{left:4px}

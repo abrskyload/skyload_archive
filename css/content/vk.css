@@ -1,0 +1,18 @@
+/**
+ * Skyload - Download manager for media content
+ * @link http://skyload.io
+ *
+ * @version v7.3.1
+ *
+ * License Agreement:
+ * http://skyload.io/eula
+ *
+ * Privacy Policy:
+ * http://skyload.io/privacy-policy
+ *
+ * Support and FAQ:
+ * http://skyload.io/help
+ * skyload.extension@gmail.com
+ */
+
+.vk-sound__download,.vk-sound__download__button{display:none}.skyload-sound__available .vk-sound__download{float:left;padding:3px 10px 0 5px;display:block}.skyload-sound__available .vk-sound__download__button{width:14px;height:18px;display:block;opacity:.75;-webkit-transition:opacity .2s ease;-o-transition:opacity .2s ease;transition:opacity .2s ease;background-repeat:no-repeat;background-position:-3px 0;background-image:url(chrome-extension://__MSG_@@extension_id__/images/content/skyload-vk-icon.png)}.skyload-sound__available .vk-sound__download:hover .vk-sound__download__button{opacity:1}.skyload-video__available .skyload-video__preloader .mv_actions_block .like_btns:after{content:"";position:relative;width:70px;height:6px;display:-webkit-inline-box;display:-webkit-inline-flex;display:-ms-inline-flexbox;display:inline-flex;left:10px;top:0;visibility:visible;background-repeat:no-repeat;background-position:0 0;background-image:url(chrome-extension://__MSG_@@extension_id__/images/content/skyload-vk-video-preloader.gif)}.vk-video__dropdown{display:none!important}.skyload-video__available .vk-video__dropdown{display:-webkit-inline-box!important;display:-webkit-inline-flex!important;display:-ms-inline-flexbox!important;display:inline-flex!important}.skyload-video__available .vk-video__dropdown .like_button_icon{width:20px;height:20px;background-image:url(chrome-extension://__MSG_@@extension_id__/images/content/skyload-vk-video-download.svg)}.skyload-video__available .vk-video__dropdown .ui_actions_menu{width:190px;margin-top:-7px!important}.skyload-video__available .vk-video__dropdown.ui_actions_menu_wrap.ui_actions_menu_top.shown .ui_actions_menu{bottom:47px}.skyload-video__available .vk-video__dropdown .ui_actions_menu:after,.skyload-video__available .vk-video__dropdown .ui_actions_menu:before{left:47px;right:auto}

@@ -1,0 +1,18 @@
+/**
+ * Skyload - Download manager for media content
+ * @link http://skyload.io
+ *
+ * @version v7.3.1
+ *
+ * License Agreement:
+ * http://skyload.io/eula
+ *
+ * Privacy Policy:
+ * http://skyload.io/privacy-policy
+ *
+ * Support and FAQ:
+ * http://skyload.io/help
+ * skyload.extension@gmail.com
+ */
+
+.mya__download-button{display:none!important}.skyload-sound__available .track:not([skyload=mod]):not(.track_error) .track__actions{right:44px}.skyload-sound__available .track:not([skyload=mod]):not(.track_error) .track__actions:after{content:"";width:28px;height:26px;display:inline-block;position:absolute;right:-34px;top:4px;background-repeat:no-repeat;background-position:center center;background-color:#fff;background-image:url(chrome-extension://__MSG_@@extension_id__/images/content/skyload-mya-preloader.gif)}.skyload-sound__available .track.track_type_full:not([skyload=mod]):not(.track_error) .track__actions:after{top:18px}.skyload-sound__available .mya__download-button{display:inline-block!important}.skyload-sound__available .button.track__delete{margin-right:4px}.skyload-sound__available .player-controls__track .track_type_player .track__name,.skyload-sound__available .player-controls__track:hover .track_type_player .track__name{margin-right:230px!important}.skyload-sound__available button.mya__download-button span.icon{-webkit-background-size:100% 100%;background-size:100%;background-position:0 -2px;background-image:url(chrome-extension://__MSG_@@extension_id__/images/content/skyload-mya-download-icon.svg)}.skyload-sound__available .player-controls__track-container button.mya__download-button,.skyload-sound__available .player-controls__track-container button.mya__download-button:focus,.skyload-sound__available .player-controls__track-container button.mya__download-button:hover{border:none;outline:0;-webkit-box-shadow:none;box-shadow:none;background-color:transparent;height:60px}.skyload-sound__available .player-controls__track-container button.mya__download-button span.icon{-webkit-background-size:115% 115%;background-size:115%;background-position:0 -4px;opacity:.96}
